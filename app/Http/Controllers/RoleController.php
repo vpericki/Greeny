@@ -9,6 +9,12 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:SuperAdmin');
+    }
+
+
     public function permissionIndex() {
         return Permission::all()->paginate(100);
     }

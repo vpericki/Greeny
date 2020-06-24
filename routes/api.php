@@ -14,11 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+// Only authenticated users can access these routes
+Route::middleware('auth:sanctum')->group(function() {
+
+    // Get current user
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    // Achievement routes
+    Route::get('/achievement', 'AchievementController@index');
+    Route::post('/achievement', 'AchievementController@store');
+    Route::get('/achievement/{id}', 'AchievementController@show');
+    Route::put('/achievement/{id}', 'AchievementController@update');
+    Route::delete('/achievement/{id}', 'AchievementController@destroy');
+
+
 
 });
 
+
+
+
+// Routes for authentication
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');

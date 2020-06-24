@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -17,11 +18,15 @@ class AuthController extends Controller
             'password' => ['required', 'min:8', 'confirmed']
         ]);
 
+
+        // Assign User role to new users
+        $userRole = Role::where('name', 'User')->first();
+
         User::create([
             'name' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ]);
+        ])->assignRole($userRole);
 
         return response() -> json(['success' => 'Successfully created new user'], 201);
     }

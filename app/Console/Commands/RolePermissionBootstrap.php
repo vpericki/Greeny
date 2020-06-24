@@ -43,12 +43,35 @@ class RolePermissionBootstrap extends Command
 
         $permissions = [
             'viewDashboard',
-            'viewUsers',
-            'editUsers',
+
             'assignRoles',
             'unassignRoles',
             'viewRoles',
             'viewPermissions',
+
+            'viewUsers',
+            'editUsers',
+
+            'viewAchievements',
+            'updateAchievements',
+            'createAchievements',
+            'deleteAchievements'
+
+        ];
+
+        $adminPermissions = [
+            'viewAchievements',
+            'updateAchievements',
+            'createAchievements',
+            'deleteAchievements',
+
+            'viewUsers',
+            'editUsers',
+        ];
+
+        $userPermissions = [
+            'viewAchievements',
+
         ];
 
         $this -> line('Settings up roles...');
@@ -61,6 +84,7 @@ class RolePermissionBootstrap extends Command
 
         $this->line('Setting up permissions...');
 
+        // Create permissions and add permissions to SuperAdmin
         $superAdminRole = Role::where('name', 'SuperAdmin')->first();
         foreach ($permissions as $permName) {
             $permission = Permission::updateOrCreate(['name' => $permName, 'guard_name' => 'api']);
@@ -69,6 +93,30 @@ class RolePermissionBootstrap extends Command
 
             $this->info("Created " . $permission->name . " Permission");
         }
+
+        // Add permissions to Admin
+        $adminRole = Role::where('name', 'Admin')->first();
+        foreach ($adminPermissions as $permName) {
+
+            $permission = Permission::where('name', $permName)->first();
+
+            $adminRole->givePermissionTo($permission);
+        }
+        $this->info("Permissions are granted to Admin");
+
+
+        // Add permissions to User
+        $userRole = Role::where('name', 'User')->first();
+        foreach ($userPermissions as $permName) {
+
+            $permission = Permission::where('name', $permName)->first();
+
+            $userRole->givePermissionTo($permission);
+        }
+        $this->info("Permissions are granted to User");
+
+
+
 
         $this->info("All permissions are granted to Super Admin");
         $this->line('Completed bootstrapping!');
