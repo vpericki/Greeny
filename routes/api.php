@@ -30,8 +30,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/achievement/{id}', 'AchievementController@update');
     Route::delete('/achievement/{id}', 'AchievementController@destroy');
 
-
-
+    // User routes
+    Route::get('/users', 'UserController@index');
+    Route::put('/users/{id}', 'UserController@update');
 });
 
 

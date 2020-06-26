@@ -75,7 +75,7 @@ class AchievementController extends Controller
         ]);
 
 
-        $achievement = Achievement::where('id', $id);
+        $achievement = Achievement::where('id', $id)->first();
 
         $achievement->name = $request->name;
         $achievement->description = $request->description;
