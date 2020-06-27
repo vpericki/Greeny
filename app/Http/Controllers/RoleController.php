@@ -16,29 +16,40 @@ class RoleController extends Controller
 
 
     public function permissionIndex() {
-        return Permission::all()->paginate(100);
+        return Permission::all();
     }
 
     public function rolesIndex() {
-        return Role::all()->paginate(100);
+        return Role::all();
     }
 
-    public function assignRoleToUser(Request $request, Role $role, User $user) {
 
-        $user -> assignRole($role);
+    public function assignRoleToUser(Request $request, $idUser,  $idRole) {
+
+        $user = User::where('id', $idUser)->first();
+        $role = Role::where('id', $idRole)->first();
+
+        $user->assignRole($role);
 
         return response()->json([
             'message' => $role->name . ' role successfully assigned to user'
         ], 200);
     }
 
-    public function removeRoleFromUser(Request $request, Role $role, User $user) {
+    public function removeRoleFromUser(Request $request, $idUser, $idRole) {
+
+        if($request->user()->id == $idUser) {
+            return response()->make('cannot remove or add roles to self', 400);
+        }
+
+        $user = User::where('id', $idUser)->first();
+        $role = Role::where('id', $idRole)->first();
 
         $user -> removeRole($role);
 
         return response() -> json([
             'message' => $role . ' role successfully removed from user'
-        ]);
+        ], 200);
     }
 
 

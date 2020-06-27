@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Achievement;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,7 +93,7 @@ class AchievementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $achievement = Achievement::where('id', $id);
 

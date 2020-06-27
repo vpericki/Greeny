@@ -30,9 +30,17 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/achievement/{id}', 'AchievementController@update');
     Route::delete('/achievement/{id}', 'AchievementController@destroy');
 
+    // User achievements
+    Route::get('/achievement/user/{id}', 'AchievementController@userAchievements');
+
     // User routes
     Route::get('/users', 'UserController@index');
     Route::put('/users/{id}', 'UserController@update');
+    Route::delete('/users/{id}', 'UserController@delete');
+
+    // Role routes
+    Route::get('/roles', 'RoleController@rolesIndex');
+    Route::delete('/role/{idUser}/{idRole}', 'RoleController@removeRoleFromUser');
 });
 
 
