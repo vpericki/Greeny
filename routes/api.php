@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function() {
     // Role routes
     Route::get('/roles', 'RoleController@rolesIndex');
     Route::delete('/role/{idUser}/{idRole}', 'RoleController@removeRoleFromUser');
+    Route::put('/role/{idUser}/{idRole}', 'RoleController@assignRoleToUser');
 });
 
 

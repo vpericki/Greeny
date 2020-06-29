@@ -2,6 +2,7 @@
 
 use App\Achievement;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AchievementSeeder extends Seeder
 {

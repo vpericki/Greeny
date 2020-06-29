@@ -26,14 +26,18 @@ class RoleController extends Controller
 
     public function assignRoleToUser(Request $request, $idUser,  $idRole) {
 
-        $user = User::where('id', $idUser)->first();
-        $role = Role::where('id', $idRole)->first();
+        if(($user = User::where('id', $idUser)->first()) && ($role = Role::where('id', $idRole)->first())) {
+            $user->assignRole($role);
 
-        $user->assignRole($role);
+            return response()->json([
+                'message' => $role->name . ' role successfully assigned to user'
+            ], 200);
+        }
 
         return response()->json([
-            'message' => $role->name . ' role successfully assigned to user'
-        ], 200);
+            'message' => 'User or role not found'
+        ], 404);
+
     }
 
     public function removeRoleFromUser(Request $request, $idUser, $idRole) {
@@ -42,14 +46,19 @@ class RoleController extends Controller
             return response()->make('cannot remove or add roles to self', 400);
         }
 
-        $user = User::where('id', $idUser)->first();
-        $role = Role::where('id', $idRole)->first();
+        if(($user = User::where('id', $idUser)->first()) && ($role = Role::where('id', $idRole)->first())) {
+            $user -> removeRole($role);
 
-        $user -> removeRole($role);
+            return response() -> json([
+                'message' => $role . ' role successfully removed from user'
+            ], 200);
+        }
 
-        return response() -> json([
-            'message' => $role . ' role successfully removed from user'
-        ], 200);
+        return response()-> json([
+            'message' => 'User or role not found'
+        ], 404);
+
+
     }
 
 
