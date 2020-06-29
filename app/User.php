@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function achievements () {
         return $this -> belongsToMany(Achievement::class);
     }
+
+    public function rewardCodes() {
+        return $this->belongsToMany(RewardCode::class);
+    }
 }

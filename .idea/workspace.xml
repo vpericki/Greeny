@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ae7bba6-9c83-4cf9-9e34-11d56f489e21" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/RewardCode.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_29_215948_create_reward_codes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_29_222045_create_reward_code_user_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/RewardCodesSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +210,10 @@
       <workItem from="1593256273778" duration="9172000" />
       <workItem from="1593287908872" duration="747000" />
       <workItem from="1593337960660" duration="1408000" />
+      <workItem from="1593377128747" duration="2056000" />
+      <workItem from="1593448022314" duration="31000" />
+      <workItem from="1593448065136" duration="1122000" />
+      <workItem from="1593460511808" duration="1620000" />
     </task>
     <servers />
   </component>
@@ -271,9 +280,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="449" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1592728854117" />
-    <state x="727" y="332" key="run.anything.popup" timestamp="1593262068855">
+    <state x="727" y="332" key="run.anything.popup" timestamp="1593461180172">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="727" y="332" key="run.anything.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1593262068855" />
+    <state x="727" y="332" key="run.anything.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1593461180172" />
   </component>
 </project>
