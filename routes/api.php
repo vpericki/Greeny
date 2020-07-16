@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 // Only authenticated users can access these routes
 Route::middleware('auth:sanctum')->group(function() {
-
     // Get current user
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -42,8 +41,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/roles', 'RoleController@rolesIndex');
     Route::delete('/role/{idUser}/{idRole}', 'RoleController@removeRoleFromUser');
     Route::put('/role/{idUser}/{idRole}', 'RoleController@assignRoleToUser');
-});
 
+    Route::get('/rewardcodes', 'RewardCodeController@index');
+    Route::get('/rewardcodes/{code}', 'RewardCodeController@redeemCode');
+});
 
 
 
