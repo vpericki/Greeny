@@ -11,15 +11,15 @@ class RewardCodeController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('role:User', ['only' => ['redeemCode']]);
-        //$this->middleware('role:Admin');
+        $this->middleware('role:User', ['only' => ['redeemCode']]);
+        $this->middleware('role:Admin');
     }
 
     public function index() {
         return RewardCode::all();
     }
 
-    public function redeemCode($code) {
+    public function redeemCode(Request $request, $code) {
 
         $rewardCode = RewardCode::where('unique_code', $code);
 

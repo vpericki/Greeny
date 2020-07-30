@@ -42,11 +42,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::delete('/role/{idUser}/{idRole}', 'RoleController@removeRoleFromUser');
     Route::put('/role/{idUser}/{idRole}', 'RoleController@assignRoleToUser');
 
+    // Reward codes
     Route::get('/rewardcodes', 'RewardCodeController@index');
-    Route::get('/rewardcodes/{code}', 'RewardCodeController@redeemCode');
+    Route::get('/rewardcodes/redeem/{code}', 'RewardCodeController@redeemCode');
 });
-
-
 
 // Routes for authentication
 Route::post('/register', 'AuthController@register');
