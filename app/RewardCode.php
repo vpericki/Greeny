@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class RewardCode extends Model
 {
+
+    public $timestamps = true;
+
     protected $fillable = [
         'unique_code', 'reward'
     ];
