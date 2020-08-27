@@ -68,6 +68,25 @@ class RewardCodeController extends Controller
         return response()->json($rewardCode, 201);
     }
 
+    public function generateCode(Request $request, $reward) {
+
+        $request->validate([
+            'code' => ['required', "unique:reward_codes,unique_code", 'min:6']
+        ]);
+
+        if(!is_numeric($reward)) {
+            return response()->make("Error, wrong parameter types, length and reward must be integers!", 400);
+        }
+
+        $code = new RewardCode;
+        $code->unique_code = $request->code;
+        $code->reward = $reward;
+
+        $code->save();
+
+        return response()->json($code, 201);
+    }
+
     public function redeemCode(Request $request, $code) {
 
         $rewardCode = RewardCode::where('unique_code', $code);

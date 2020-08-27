@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function() {
     // Reward codes
     Route::get('/rewardcodes', 'RewardCodeController@index');
     Route::post('/rewardcodes/{length}/{reward}', 'RewardCodeController@generateRandomCode');
+    Route::post('rewardcodes/{reward}', 'RewardCodeController@generateCode');
     Route::get('/rewardcodes/redeem/{code}', 'RewardCodeController@redeemCode');
 });
 
