@@ -35,8 +35,12 @@ class RewardCodeController extends Controller
 
     public function generateRandomCode(Request $request, $length, $reward) {
 
-        if(!is_numeric($length) || !is_numeric($reward)) {
-            return response()->make("Error, wrong parameter types, length and reward must be integers!", 400);
+        if(!is_numeric($reward) || $reward <= 0 || $reward > 100) {
+            return response()->make("Error, reward must be between 1 and 100 (included)", 400);
+        }
+
+        if(!is_numeric($length) || $length < 6 || $length > 16) {
+            return response()->make("Error, length must be between 6 and 16 (included)", 400);
         }
 
         $counter = 0;
