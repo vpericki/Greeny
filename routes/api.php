@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/rewardcodes/{length}/{reward}', 'RewardCodeController@generateRandomCode');
     Route::post('rewardcodes/{reward}', 'RewardCodeController@generateCode');
     Route::get('/rewardcodes/redeem/{code}', 'RewardCodeController@redeemCode');
+    Route::delete('rewardcodes/{id}', 'RewardCodeController@delete');
 });
 
 // Routes for authentication

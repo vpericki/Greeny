@@ -6,6 +6,7 @@ use App\RewardCode;
 use App\User;
 use Carbon\Exceptions\InvalidTypeException;
 use Dotenv\Exception\ValidationException;
+use Exception;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +104,27 @@ class RewardCodeController extends Controller
             return response()->json(['points' => Auth::user()->points], 200);
         }
         return response()->make('error, wrong code', 400);
+    }
+
+    public function delete(Request $request, $id) {
+
+        if(!is_numeric($id)) {
+            return response()->make('Id is not a number', 400);
+        }
+
+        $rewardCode = RewardCode::where('id', $id)->first();
+
+        try {
+            $rewardCode->delete();
+            return response()->make("Successfully deleted code with id $id!", 204);
+
+        }
+        catch (Exception $exception) {
+
+            return response()->json(['error' => json_encode($exception)], 500);
+        }
+
+
     }
 
 
