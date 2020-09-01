@@ -94,16 +94,44 @@ class RewardCodeController extends Controller
 
     public function redeemCode(Request $request, $code) {
 
-        $rewardCode = RewardCode::where('unique_code', $code);
+        $rewardCode = RewardCode::where('unique_code', $code)->first();
 
-        if($rewardCode) {
-            $reward = $rewardCode->reward;
-
-            Auth::user()->points = Auth::user()->points + $reward;
-
-            return response()->json(['points' => Auth::user()->points], 200);
+        if($rewardCode === null) {
+            return response()->make("Entered code doesn't exist", 400);
         }
-        return response()->make('error, wrong code', 400);
+
+        $user = User::where('id', Auth::user()->id)->first();
+
+        $user->points = 0;
+        $codeNotUsed = true;
+
+        foreach($user->rewardCodes as $c) {
+            $user->points += $c->reward;
+
+            if ($c === $rewardCode) {
+                $codeNotUsed = false;
+            }
+        }
+
+        if ($codeNotUsed) {
+            $user->points += $rewardCode->points;
+        }
+        else {
+            return response()->make('Error, code already used!', 400);
+        }
+
+
+
+        try {
+            $user->save();
+            return response()->json(['success' => 'Successfully redeemed a code'], 200);
+        }
+        catch (Exception $exception) {
+
+            return response()->json(['error' => json_encode($exception)], 500);
+        }
+
+
     }
 
     public function delete(Request $request, $id) {
