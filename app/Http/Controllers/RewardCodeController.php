@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use AchievementChecker;
 use App\RewardCode;
 use App\User;
 use Carbon\Exceptions\InvalidTypeException;
@@ -114,13 +115,19 @@ class RewardCodeController extends Controller
         }
 
         if ($codeNotUsed) {
+
+            $achievementChecker = new AchievementChecker;
+
+
             $user->points += $rewardCode->points;
+            $user->rewardCodes()->attach([$rewardCode]);
+
+            $achievementChecker->checkAndUpdateForUser($user);
+
         }
         else {
             return response()->make('Error, code already used!', 400);
         }
-
-
 
         try {
             $user->save();
