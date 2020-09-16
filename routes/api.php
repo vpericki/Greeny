@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/achievement/{id}', 'AchievementController@show');
     Route::put('/achievement/{id}', 'AchievementController@update');
     Route::delete('/achievement/{id}', 'AchievementController@destroy');
+    Route::get('/GetMaximumPoints', 'AchievementController@maximumPoints');
 
     // User achievements
     Route::get('/achievement/user/{id}', 'AchievementController@userAchievements');

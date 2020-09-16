@@ -6,6 +6,7 @@ use App\Achievement;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AchievementController extends Controller
 {
@@ -101,4 +102,13 @@ class AchievementController extends Controller
 
         return response('deleted', 204);
     }
+
+    public function maximumPoints(Request $request) {
+        $maxPoints = DB::table('achievements')
+            ->sum('required_points');
+
+        return response()->json(['max_points' => $maxPoints], 200);
+    }
+
+
 }

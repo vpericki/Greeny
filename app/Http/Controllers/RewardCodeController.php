@@ -109,18 +109,19 @@ class RewardCodeController extends Controller
         foreach($user->rewardCodes as $c) {
             $user->points += $c->reward;
 
-            if ($c === $rewardCode) {
+            if ($c->id === $rewardCode->id) {
                 $codeNotUsed = false;
             }
+            //Log::debug('Message', [$c, $rewardCode]);
+
+
         }
 
         if ($codeNotUsed) {
-
             $achievementChecker = new AchievementChecker;
 
-
             $user->points += $rewardCode->points;
-            $user->rewardCodes()->attach([$rewardCode]);
+            $user->rewardCodes()->attach($rewardCode);
 
             $achievementChecker->checkAndUpdateForUser($user);
 
@@ -137,8 +138,6 @@ class RewardCodeController extends Controller
 
             return response()->json(['error' => json_encode($exception)], 500);
         }
-
-
     }
 
     public function delete(Request $request, $id) {
