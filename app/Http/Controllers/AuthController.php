@@ -42,7 +42,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)) {
-            return response()->json([Auth::user(), Auth::user()->getRoleNames()], 200);
+            return response()->json([Auth::user(), Auth::user()->getRoleNames(), 'token' => Auth::user()->createToken("token")], 200);
         }
 
         throw ValidationException::withMessages([

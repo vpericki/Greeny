@@ -132,7 +132,7 @@ class RewardCodeController extends Controller
 
         try {
             $user->save();
-            return response()->json(['success' => 'Successfully redeemed a code'], 200);
+            return response()->make('Successfully redeemed a code', 200);
         }
         catch (Exception $exception) {
 
