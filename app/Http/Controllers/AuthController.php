@@ -54,7 +54,7 @@ class AuthController extends Controller
         Auth::logout();
     }
 
-    public function currentUser(Request $request) {
+    public function currentUserAchievements(Request $request) {
       return response()->json(auth()->user()->achievements(), 200);
     }
 }
