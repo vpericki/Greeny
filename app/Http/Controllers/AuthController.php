@@ -55,6 +55,6 @@ class AuthController extends Controller
     }
 
     public function currentUser(Request $request) {
-      return response()->json([Auth::user(), Auth::user()->getRoleNames(), 'token' => Auth::user()->createToken("token"), Auth::user()->achievements], 200);
+      return response()->json(auth()->user()->achievements(), 200);
     }
 }
