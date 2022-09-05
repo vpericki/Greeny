@@ -55,6 +55,6 @@ class AuthController extends Controller
     }
 
     public function currentUser(Request $request, $id) {
-      return User::where('id', '==', $id)->with(['achievements', 'roles'])->get();
+      return User::where('id', '=', $id)->with(['achievements', 'roles'])->get();
     }
 }
