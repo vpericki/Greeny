@@ -42,4 +42,5 @@ Route::middleware('auth:sanctum')->group(function() {
 // Routes for authentication
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
+Route::post('/currentUser', 'AuthController@currentUser');
 Route::post('/logout', 'AuthController@logout');

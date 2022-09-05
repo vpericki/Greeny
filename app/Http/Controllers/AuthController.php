@@ -53,4 +53,8 @@ class AuthController extends Controller
     public function logout() {
         Auth::logout();
     }
+
+    public function currentUser(Request $request) {
+      return response()->json([Auth::user(), Auth::user()->getRoleNames(), 'token' => Auth::user()->createToken("token"), Auth::user()->achievements], 200);
+    }
 }
